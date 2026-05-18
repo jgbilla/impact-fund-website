@@ -1,8 +1,8 @@
 export const navLinks = [
-  { label: "Origin", href: "#origin" },
-  { label: "Vision", href: "#vision" },
-  { label: "Model", href: "#model" },
-  { label: "Roadmap", href: "#roadmap" }
+  { label: "Origin", href: "/#origin" },
+  { label: "Vision", href: "/#vision" },
+  { label: "Model", href: "/#model" },
+  { label: "Roadmap", href: "/#roadmap" }
 ];
 
 export const metrics = [
@@ -12,10 +12,12 @@ export const metrics = [
   { value: 300, suffix: "+", label: "Fellows placed" }
 ];
 
-export const projects = [
+export const selectedProjects = [
   {
     region: "Kenya",
     sector: "Solar electrification",
+    cohort: "Cohort 1 - 2024",
+    status: "Selected Project",
     title: "Kapiyo Solar Access Project",
     description:
       "Solar lighting for an off-grid community in Kapiyo, helping students study after dusk and families extend productive work hours."
@@ -23,6 +25,8 @@ export const projects = [
   {
     region: "DRC",
     sector: "Agricultural processing",
+    cohort: "Cohort 1 - 2024",
+    status: "Selected Project",
     title: "Kashusha Corn Processing Plant",
     description:
       "An energy-efficient mill serving farmers near Bukavu, adding local value to crops while creating jobs in eastern DRC."
@@ -30,9 +34,48 @@ export const projects = [
   {
     region: "Tanzania",
     sector: "Cashew value chain",
+    cohort: "Cohort 1 - 2024",
+    status: "Selected Project",
     title: "Mtwara Cashew Automation",
     description:
       "A venture to process more cashews locally in Mtwara, capturing value for farmers before raw exports leave the country."
+  }
+];
+
+export const projectCohorts = [
+  {
+    year: "2025",
+    label: "Winning Projects - Cohort 2",
+    projects: [
+      {
+        region: "Ghana",
+        sector: "Plastic recovery",
+        title: "Ishara",
+        description:
+          "A buyback-center pilot in Accra that gives waste pickers safer, more reliable income while creating traceable plastic supply for local recyclers."
+      },
+      {
+        region: "Tanzania",
+        sector: "Global education access",
+        title: "Rafiki Global Scholars",
+        description:
+          "A mentorship and application-support pipeline helping low-income Tanzanian graduates pursue universities abroad, with added coding and leadership programming."
+      },
+      {
+        region: "Rwanda",
+        sector: "Public transit technology",
+        title: "PickUp",
+        description:
+          "A Kigali transit platform for bus ticketing, real-time tracking, and USSD access, designed to reduce commuter wait times and improve agency planning data."
+      },
+      {
+        region: "Kenya and Nigeria",
+        sector: "STEM and research access",
+        title: "PEAR",
+        description:
+          "A hands-on STEM and research program for under-resourced secondary school students, pairing summer instruction with PEAR chapters, mentors, and STEM kits."
+      }
+    ]
   }
 ];
 

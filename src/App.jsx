@@ -8,8 +8,9 @@ import {
   navLinks,
   phases,
   pillars,
-  projects,
+  projectCohorts,
   roadmapStats,
+  selectedProjects,
   timeline
 } from "./content.js";
 
@@ -94,32 +95,108 @@ function SectionIntro({ eyebrow, title, children, centered = false }) {
   );
 }
 
-function App() {
-  useReveal();
+function Header() {
+  return (
+    <header className="site-header">
+      <a className="brand" href="/" aria-label="Bridge Impact Fund home">
+        <span>Bridge</span> Impact Fund
+      </a>
+      <nav className="nav-links" aria-label="Primary navigation">
+        {navLinks.map((link) => (
+          <a key={link.href} href={link.href}>
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <a className="nav-action" href="/#contact">
+        Get Involved
+      </a>
+    </header>
+  );
+}
 
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <a className="brand" href="/">
+        <span>Bridge</span> Impact Fund
+      </a>
+      <nav aria-label="Footer navigation">
+        {navLinks.map((link) => (
+          <a key={link.href} href={link.href}>
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <p>Building on the MIT ASA Impact Fund, 2027-2032</p>
+    </footer>
+  );
+}
+
+function ProjectsPage() {
+  const cohorts = [
+    { year: "2024", label: "Selected Projects - Cohort 1", projects: selectedProjects },
+    ...projectCohorts
+  ];
+
+  return (
+    <main id="top" className="projects-page">
+      <section className="projects-hero">
+        <p className="eyebrow reveal">Project Archive</p>
+        <h1 className="reveal">All funded projects</h1>
+        <p className="projects-hero-copy reveal">
+          A record of the student-led ventures selected by the MIT ASA Impact Fund,
+          from the 2024 inaugural cohort through the 2025 winning projects.
+        </p>
+        <a className="button button-secondary reveal" href="/#origin">
+          Back to Fund Overview
+        </a>
+      </section>
+
+      <section className="projects-archive-page surface-section">
+        {cohorts.map((cohort) => (
+          <div className="project-year-block" key={cohort.year}>
+            <div className="project-year-heading reveal">
+              <span>{cohort.year}</span>
+              <h2>{cohort.label}</h2>
+            </div>
+            <div className="project-page-grid">
+              {cohort.projects.map((project, index) => (
+                <article
+                  className={`project-card project-page-card reveal ${
+                    project.status ? "project-card-selected" : "project-card-compact"
+                  }`}
+                  style={{ transitionDelay: `${Math.min(index, 3) * 70}ms` }}
+                  key={`${cohort.year}-${project.title}`}
+                >
+                  {project.status ? (
+                    <div className="project-card-meta">
+                      <span>{project.status}</span>
+                      <span>{project.cohort}</span>
+                    </div>
+                  ) : null}
+                  <p className="card-kicker">
+                    {project.region} / {project.sector}
+                  </p>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+      </section>
+    </main>
+  );
+}
+
+function HomePage() {
   const founderHref = `mailto:${contactEmail}?subject=Bridge%20Impact%20Fund%20Founder%20Application`;
   const partnerHref = `mailto:${contactEmail}?subject=Bridge%20Impact%20Fund%20Partnership`;
   const mentorHref = `mailto:${contactEmail}?subject=Bridge%20Impact%20Fund%20Mentor%20Interest`;
 
   return (
-    <>
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Bridge Impact Fund home">
-          <span>Bridge</span> Impact Fund
-        </a>
-        <nav className="nav-links" aria-label="Primary navigation">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
-        </nav>
-        <a className="nav-action" href="#contact">
-          Get Involved
-        </a>
-      </header>
-
-      <main id="top">
+    <main id="top">
         <section className="hero">
           <div className="hero-content">
             <p className="eyebrow">Cohort 2027</p>
@@ -169,13 +246,25 @@ function App() {
           </div>
 
           <div className="project-list">
-            <p className="eyebrow reveal">Founded Ventures - Cohort 1</p>
-            {projects.map((project, index) => (
+            <div className="project-list-header reveal">
+              <p className="eyebrow">Selected Projects - Cohort 1 (2024)</p>
+              <a
+                className="text-button"
+                href="/projects"
+              >
+                See More
+              </a>
+            </div>
+            {selectedProjects.map((project, index) => (
               <article
-                className="project-card reveal"
+                className="project-card project-card-selected reveal"
                 style={{ transitionDelay: `${index * 90}ms` }}
                 key={project.title}
               >
+                <div className="project-card-meta">
+                  <span>{project.status}</span>
+                  <span>{project.cohort}</span>
+                </div>
                 <p className="card-kicker">
                   {project.region} / {project.sector}
                 </p>
@@ -346,21 +435,20 @@ function App() {
             <small>Applications open for the 2027 cohort. MIT and Harvard students receive priority review.</small>
           </div>
         </section>
-      </main>
+    </main>
+  );
+}
 
-      <footer className="site-footer">
-        <a className="brand" href="#top">
-          <span>Bridge</span> Impact Fund
-        </a>
-        <nav aria-label="Footer navigation">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
-        </nav>
-        <p>Building on the MIT ASA Impact Fund, 2027-2032</p>
-      </footer>
+function App() {
+  useReveal();
+  const normalizedPath = window.location.pathname.replace(/\/$/, "");
+  const isProjectsPage = normalizedPath === "/projects";
+
+  return (
+    <>
+      <Header />
+      {isProjectsPage ? <ProjectsPage /> : <HomePage />}
+      <Footer />
     </>
   );
 }

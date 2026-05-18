@@ -376,6 +376,41 @@ section {
   gap: 1rem;
 }
 
+.project-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-list-header .eyebrow {
+  margin-bottom: 0;
+}
+
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0.45rem 0.75rem;
+  color: var(--gold-light);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1;
+  background: rgba(200, 146, 42, 0.1);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.text-button:hover {
+  background: rgba(200, 146, 42, 0.16);
+  transform: translateY(-1px);
+}
+
 .project-card,
 .pillar-card,
 .finance-card,
@@ -393,6 +428,149 @@ section {
 .project-card:hover {
   transform: translateX(4px);
   border-color: var(--line-strong);
+}
+
+.project-card-selected {
+  background: linear-gradient(135deg, rgba(23, 52, 34, 0.96), rgba(15, 33, 23, 0.96));
+}
+
+.project-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.8rem;
+}
+
+.project-card-meta span {
+  display: inline-flex;
+  padding: 0.22rem 0.5rem;
+  color: var(--gold-light);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  border: 1px solid rgba(200, 146, 42, 0.28);
+  border-radius: 999px;
+  background: rgba(200, 146, 42, 0.08);
+}
+
+.project-archive {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.project-cohort {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.project-cohort-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.project-cohort-title span {
+  color: var(--gold-light);
+  font-family: "Roboto Mono", monospace;
+}
+
+.project-card-compact {
+  background: rgba(11, 26, 18, 0.82);
+}
+
+.projects-page {
+  background: var(--bg);
+}
+
+.projects-page .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.projects-hero {
+  display: grid;
+  align-content: end;
+  min-height: 56vh;
+  padding: 8rem 3.5rem 4.5rem;
+  background:
+    linear-gradient(135deg, rgba(8, 22, 15, 0.2), rgba(15, 33, 23, 0.92)),
+    radial-gradient(circle at 88% 16%, rgba(232, 198, 116, 0.14), transparent 34%),
+    var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.projects-hero h1 {
+  max-width: 780px;
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 5rem;
+  font-weight: 600;
+  line-height: 1.02;
+}
+
+.projects-hero-copy {
+  max-width: 700px;
+  margin: 1.2rem 0 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+
+.projects-hero .button {
+  justify-self: start;
+  margin-top: 2rem;
+}
+
+.projects-archive-page {
+  display: grid;
+  gap: 4.5rem;
+}
+
+.project-year-block {
+  display: grid;
+  grid-template-columns: minmax(9rem, 14rem) minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+.project-year-heading {
+  padding-top: 0.2rem;
+}
+
+.project-year-heading span {
+  color: var(--gold-light);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.project-year-heading h2 {
+  margin: 0.55rem 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.15rem;
+  font-weight: 600;
+  line-height: 1.08;
+}
+
+.project-page-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.project-page-card {
+  min-height: 255px;
+}
+
+.project-page-card:hover {
+  transform: translateY(-2px);
 }
 
 .project-card h3,
@@ -643,6 +821,11 @@ section {
     padding-left: 1.5rem;
   }
 
+  .projects-hero {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -776,6 +959,34 @@ section {
   .section-title,
   .contact-section h2 {
     font-size: 2.55rem;
+  }
+
+  .projects-hero {
+    min-height: auto;
+    padding-top: 6.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .projects-hero h1 {
+    font-size: clamp(3rem, 13vw, 3.7rem);
+    line-height: 1;
+  }
+
+  .projects-archive-page {
+    gap: 3.25rem;
+  }
+
+  .project-year-block {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .project-page-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-page-card {
+    min-height: 0;
   }
 
   .quote {
